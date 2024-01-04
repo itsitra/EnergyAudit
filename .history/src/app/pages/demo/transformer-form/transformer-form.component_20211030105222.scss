@@ -1,0 +1,6 @@
+@include nb-install-component() {
+  nb-card {
+    max-width: 400px;
+    max-height: 500px;
+  }
+}

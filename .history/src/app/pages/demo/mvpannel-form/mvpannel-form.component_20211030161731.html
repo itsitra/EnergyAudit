@@ -1,0 +1,51 @@
+<nb-card>
+    <nb-card-header>{{ title }}</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputphase" class="label">Phase</label>
+                    <input type="text" nbInput fullWidth id="inputphase" placeholder="Phase">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputtemperature" class="label">Ambient Temperature</label>
+                    <input type="text" nbInput fullWidth id="inputtemperature" placeholder="Ambient Temperature">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputbody" class="label">Body Meterial</label>
+                    <input type="text" nbInput fullWidth id="inputbody" placeholder="Body Meterial">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputiprating" class="label">IP Rating</label>
+                    <input type="text" nbInput fullWidth id="inputiprating" placeholder="IP Rating">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputloadcurrent" class="label">Current Rating</label>
+                    <input type="text" nbInput fullWidth id="inputloadcurrent" placeholder="Current Rating">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputgrade" class="label">Automation Grade</label>
+                    <input type="text" nbInput fullWidth id="inputgrade" placeholder="Automation Grade">
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton hero status="primary" (click)="dismiss()">Save</button>
+        <button nbButton hero status="danger" style="margin-left:8px;" (click)="dismiss()">Close</button>
+    </nb-card-footer>
+</nb-card>

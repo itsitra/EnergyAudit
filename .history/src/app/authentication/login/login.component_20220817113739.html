@@ -1,0 +1,30 @@
+<h2>Login</h2>
+<nb-card-body>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="label">User name</label>
+    <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Username" ngModel #username="ngModel"
+      id="username" name="username" required />
+    <small class="text-danger" *ngIf="username.invalid && (username.dirty || username.touched)">Username cannot be
+      empty</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1" class="label">Password</label>
+    <input type="password" nbInput fullWidth id="exampleInputPassword1" placeholder="Password" ngModel
+      #password="ngModel" id="password" name="password" required />
+    <small class="text-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+      <div *ngIf="password.errors?.['required']">
+        password is required.
+      </div>
+    </small>
+  </div>
+  <!-- <small class="text-danger" *ngIf="err">{{ err }}</small> -->
+
+  <div class="form-group d-flex justify-content-between">
+    <nb-checkbox [(ngModel)]="rememberme" (click)="rememberMe()" [ngModelOptions]="{ standalone: true }">Remember me
+    </nb-checkbox>
+    <a class="text-decoration-none" href="auth/forget-password">Forgot password?</a>
+  </div>
+  <button type="submit" nbButton fullWidth status="primary" [disabled]="!formLogin.valid">
+    Submit
+  </button>
+</nb-card-body>

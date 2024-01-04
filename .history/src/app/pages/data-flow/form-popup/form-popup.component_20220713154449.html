@@ -1,0 +1,32 @@
+<!-- <nb-card>
+    <nb-card-header>Block form</nb-card-header>
+    <nb-card-body *ngIf="data.LevelData.formDatas.length>0">
+        <div class="row field-details">
+            <div class="col-sm-6" *ngFor="let field of data.LevelData.formDatas; let i=index;">
+                <div class="form-group">
+                    <label class="label">{{field.displayName}} <span class="required"
+                            *ngIf="field.mandatory==='1'">*</span></label>
+                    <input type="text" nbInput fullWidth [(ngModel)]="field.fieldValue"
+                        placeholder="Enter the {{field.displayName}}" (change)="updateErrorFields()"
+                        *ngIf="field.dataType==='Character'">
+                    <input type="number" nbInput fullWidth [(ngModel)]="field.fieldValue" min="0"
+                        placeholder="Enter the {{field.displayName}}" (change)="updateErrorFields()"
+                        *ngIf="field.dataType==='Numeric'">
+                    <span *ngIf="field.isError" class="error-field">Please fill the <b>{{field.displayName}}</b>
+                        field</span>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 button-section">
+                <button type="submit" class="save-btn" status="success" [class.disabled]="checkRequiredFields()"
+                    (click)="saveData()" nbButton>Submit</button>
+                <button type="submit" class="cancel-btn" status="danger" (click)="close()" nbButton>cancel</button>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </nb-card-footer>
+</nb-card> -->

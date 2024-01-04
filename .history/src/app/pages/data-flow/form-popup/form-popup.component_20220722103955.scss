@@ -1,0 +1,36 @@
+::ng-deep {
+  .form-popup {
+    background: #ffffff;
+    height: 598px;
+    width: 698px;
+    border-radius: 10px;
+    mat-dialog-container {
+      padding: 0px;
+    }
+  }
+}
+
+.field-details {
+  max-height: 398px;
+  overflow: auto;
+  .required {
+    color: #f10303;
+  }
+  .error-field {
+    color: #e30303;
+    font-size: 12px;
+  }
+}
+
+.button-section {
+  text-align: center;
+  .save-btn {
+    margin-right: 4px;
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
+  .cancel-btn {
+    margin-left: 4px;
+  }
+}

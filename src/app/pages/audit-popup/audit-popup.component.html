@@ -1,0 +1,136 @@
+<nb-card>
+  <nb-card-body>
+    <!-- <form #formLogin="ngForm" (ngSubmit)="loginSubmit(formLogin)"> -->
+    <div>
+      <div class="form-group">
+        <label>Customer_Id</label>
+        <select
+          [name]="Customer_Id"
+          [(ngModel)]="Customer_Id"
+          (ngModelChange)="doValidationone()"
+          class="form-control"
+        >
+          <!-- <option>Choose Audit Value</option> -->
+          <option>Choose One</option>
+          <option *ngFor="let web of userList" [value]="web.Mill_id">
+            {{ web.Mill_Name }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="label">Audit</label>
+        <select
+          [name]="AuditValue"
+          [(ngModel)]="AuditValue"
+          (ngModelChange)="doValidationone()"
+          class="form-control"
+        >
+          <!-- <option>Choose Audit Value</option> -->
+          <option>Choose One</option>
+          <option *ngFor="let web of AuditListdata" [value]="web.audit_id">
+            {{ web.Audit_Name }}
+          </option>
+        </select>
+        <!-- <small
+          class="text-danger"
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+          >Username cannot be empty</small
+        > -->
+      </div>
+      <div class="form-group">
+        <label class="label">Mill</label>
+        <select
+          [name]="MillValue"
+          [(ngModel)]="MillValue"
+          class="form-control"
+          (ngModelChange)="doValidationtwo()"
+        >
+          <option>Choose Mill Value</option>
+          <option *ngFor="let web of MillListdata" [value]="web.Mill_id">
+            {{ web.Mill_Name }}
+          </option>
+        </select>
+        <!-- <small
+          class="text-danger"
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+          >Username cannot be empty</small
+        > -->
+      </div>
+      <div class="form-group" *ngIf="Key == 3 || Key == 0">
+        <label class="label">Intermediate Screen</label>
+        <select
+          [name]="IntermediateValue"
+          [(ngModel)]="IntermediateValue"
+          class="form-control"
+          (ngModelChange)="doValidationtwo()"
+        >
+          <option>Choose Intermediate Value</option>
+          <option
+            *ngFor="let web of IntermediateListData"
+            [value]="web.ScreenNo"
+          >
+            {{ web.ScreenName }}
+          </option>
+        </select>
+        <!-- <small
+          class="text-danger"
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+          >Username cannot be empty</small
+        > -->
+      </div>
+      <div class="form-group" *ngIf="Key == 2 || Key == 0">
+        <label class="label">Observable Screen</label>
+        <select
+          [name]="ObservableValue"
+          [(ngModel)]="ObservableValue"
+          class="form-control"
+          (ngModelChange)="doValidationtwo()"
+        >
+          <option>Choose Observable Value</option>
+          <option *ngFor="let web of ObservableListData" [value]="web.ScreenNo">
+            {{ web.ScreenName }}
+          </option>
+        </select>
+        <!-- <small
+          class="text-danger"
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+          >Username cannot be empty</small
+        > -->
+      </div>
+      <div class="form-group" *ngIf="Key == 1 || Key == 0">
+        <label class="label">Questionnaire</label>
+        <select
+          [name]="QuestionnaireValue"
+          [(ngModel)]="QuestionnaireValue"
+          class="form-control"
+          (ngModelChange)="doValidationtwo()"
+        >
+          <option>Choose Questionnaire Value</option>
+          <option
+            *ngFor="let web of QuestionnaireListData"
+            [value]="web.ScreenNo"
+          >
+            {{ web.ScreenName }}
+          </option>
+        </select>
+        <!-- <small
+          class="text-danger"
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+          >Username cannot be empty</small
+        > -->
+      </div>
+
+      <button
+        type="submit"
+        nbButton
+        fullWidth
+        status="primary"
+        [disabled]="buttondisable"
+        (click)="onSubmit()"
+      >
+        Continue
+      </button>
+    </div>
+    <!-- </form> -->
+  </nb-card-body>
+</nb-card>

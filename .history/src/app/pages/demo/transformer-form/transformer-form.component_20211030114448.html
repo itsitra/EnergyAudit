@@ -1,0 +1,79 @@
+<nb-card>
+    <nb-card-header>{{ title }}</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputName" class="label">Transformer Name</label>
+                    <input type="text" nbInput fullWidth id="inputName" placeholder="Transformer Name">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputkva" class="label">kVa Rating</label>
+                    <input type="text" nbInput fullWidth id="inputkva" placeholder="kVa Rating">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputprimary" class="label">Primary Voltage</label>
+                    <input type="text" nbInput fullWidth id="inputprimary" placeholder="Primary Voltage">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputsecondary" class="label">Secondary Voltage</label>
+                    <input type="text" nbInput fullWidth id="inputsecondary" placeholder="Secondary Voltage">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputloadcurrent" class="label">Full Load Current</label>
+                    <input type="text" nbInput fullWidth id="inputloadcurrent" placeholder="Full Load Current">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputnoofphase" class="label">No of phase</label>
+                    <input type="text" nbInput fullWidth id="inputnoofphase" placeholder="No of phase">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputfrequency" class="label">Frequency</label>
+                    <input type="text" nbInput fullWidth id="inputfrequency" placeholder="Frequency">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputterminals" class="label">Terminals</label>
+                    <input type="text" nbInput fullWidth id="inputterminals" placeholder="Terminals">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputserialnumber" class="label">Serial Number</label>
+                    <input type="text" nbInput fullWidth id="inputserialnumber" placeholder="Serial Number">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputweightage" class="label">Weightage (KG)</label>
+                    <input type="text" nbInput fullWidth id="inputweightage" placeholder="Weightage">
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton hero status="primary" (click)="save()">Save</button>
+        <button nbButton hero status="danger" style="margin-left:8px;" (click)="dismiss()">Close</button>
+    </nb-card-footer>
+</nb-card>

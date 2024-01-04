@@ -1,0 +1,26 @@
+<nb-card>
+    <nb-card-header>Block form</nb-card-header>
+    <nb-card-body *ngIf="data.LevelData.formDatas.length>0">
+        <div class="row field-details">
+            <div class="col-sm-6" *ngFor="let field of data.LevelData.formDatas; let i=index;">
+                <div class="form-group">
+                    <label class="label">{{field.displayName}} <span class="required"
+                            *ngIf="field.mandatory==='1'">*</span></label>
+                    <input type="text" nbInput fullWidth [(ngModel)]="field.fieldValue"
+                        placeholder="Enter the {{field.displayName}}">
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 button-section">
+                <button type="submit" class="save-btn" status="success" [disabled]="checkRequiredFields()"
+                    (click)="saveData()" nbButton>Submit</button>
+                <button type="submit" class="cancel-btn" status="danger" (click)="close()" nbButton>cancel</button>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </nb-card-footer>
+</nb-card>

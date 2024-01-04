@@ -1,0 +1,204 @@
+<div class="card">
+  <nb-card style="font-family: Poppins, Helvetica, sans-serif !important">
+    <nb-card-header> Observation Management</nb-card-header>
+    <nb-card-body>
+      <form>
+        <div class="row" *ngIf="isShown">
+          <div class="col-lg-12">
+            <div class="row">
+              <!-- <div class="col-lg-12" style="float: right">
+                <input
+                  type="button"
+                  style="float: right"
+                  value="Add User"
+                  *ngIf="IsShownAddButton"
+                  (click)="OpenAddUserPopup()"
+                />
+              </div> -->
+
+              <div class="col-md-12" *ngIf="isShown" style="width: 100%">
+                <form class="col-md-12 row" style="width: 100%">
+                  <div
+                    *ngFor="let fields of empList; let i = index"
+                    class="col-md-6"
+                  >
+                    <div
+                      class="form-group"
+                      *ngIf="fields.textField"
+                      style="width: 100%"
+                    >
+                      <label class="label">{{ fields.DispName }}</label>
+                      <input
+                        [type]="
+                          fields.DataType == 'Numeric'
+                            ? 'number'
+                            : fields.DataType == 'Character'
+                            ? 'text'
+                            : 'datetime-local'
+                        "
+                        nbInput
+                        fullWidth
+                        [placeholder]="fields.Field_Name"
+                        [name]="fields.Field_Name"
+                        [(ngModel)]="fields.value"
+                        (ngModelChange)="doValidation(i)"
+                        required
+                      />
+                      <small class="text-danger" *ngIf="fields.error">{{
+                        fields.errorText
+                      }}</small>
+                      <!-- {{ fields.value }} -->
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      text-align: center;
+                      display: flex;
+                      width: 100%;
+                      justify-content: center;
+                    "
+                  >
+                    <button (click)="onSubmit()" *ngIf="viewOption !== true">
+                      {{ Btn_Name }}
+                    </button>
+                    <button (click)="Back()">Back</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-lg-12" style="float: right">
+          <input
+            type="button"
+            style="float: right"
+            value="Add"
+            *ngIf="IsShownAddButton"
+            (click)="OpenAddObservationPopup()"
+          />
+        </div>
+
+        <!-- <nb-card>
+          <nb-card-header>
+            Mill List
+          </nb-card-header>
+          <nb-card-body> style="height: 700px; overflow: auto" -->
+        <div class="table-responsive" *ngIf="IsShownTable">
+          <table #dt class="table table-bordered table-striped">
+            <!-- table-bordered table-striped --><!-- <th style="width: 130px;"> City</th>
+                      <th style="width: 130px;"> State </th>   -->
+            <!-- <td style="width: 130px;">{{mill.City}}</td>
+                      <td style="width: 130px;">{{mill.State}}</td>  -->
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>PT_Id</th>
+                <th>PT_Equip_Vicinity</th>
+                <th>PT_Commission_Date</th>
+                <th>PT_Neutral_Current</th>
+                <th>PT_Neutral_Voltage</th>
+                <th>PT_Noise_Source</th>
+                <th>PT_Noise_Vibration</th>
+                <th>PT_Noise_disturbance_GC_Unit</th>
+                <th>PT_Oil_Temp</th>
+                <th>PT_Operation</th>
+                <th>PT_Panel_Vibration</th>
+                <th>PT_Tripping</th>
+                <th>PT_VCB_contact_Failure</th>
+                <th>PT_Winding_Temp</th>
+                <th>PT_fault_replacement</th>
+                <th>PT_insulation_Failure</th>
+                <th>PT_oil_replacement</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr
+                *ngFor="let List of ObservationDataList; let i = index"
+                style="width: 100%"
+              >
+                <td>{{ i + 1 }}</td>
+                <td>{{ List.PT_Id }}</td>
+                <td>{{ List.PT_Equip_Vicinity }}</td>
+                <td>{{ List.PT_Commission_Date | date: "dd-MM-yyyy" }}</td>
+                <td>{{ List.PT_Neutral_Current }}</td>
+                <td>{{ List.PT_Neutral_Voltage }}</td>
+                <td>{{ List.PT_Noise_Source }}</td>
+                <td>{{ List.PT_Noise_Vibration }}</td>
+                <td>{{ List.PT_Noise_disturbance_GC_Unit }}</td>
+                <td>{{ List.PT_Oil_Temp }}</td>
+                <td>{{ List.PT_Operation }}</td>
+                <td>{{ List.PT_Panel_Vibration }}</td>
+                <td>{{ List.PT_Tripping }}</td>
+                <td>{{ List.PT_VCB_contact_Failure }}</td>
+                <td>{{ List.PT_Winding_Temp }}</td>
+                <td>{{ List.PT_fault_replacement }}</td>
+                <td>{{ List.PT_insulation_Failure }}</td>
+                <td>{{ List.PT_oil_replacement }}</td>
+                <td>
+                  <span *ngIf="List.status == 'A'">
+                    <nb-icon
+                      icon="edit-outline"
+                      pack="eva"
+                      class="flip-icon Editicondesign"
+                      (click)="Edit(i)"
+                      *ngIf="currentUser_role !== 'Super_admin'"
+                    ></nb-icon>
+                    <nb-icon
+                      icon="eye"
+                      pack="eva"
+                      class="flip-icon Editicondesign"
+                      (click)="view(i)"
+                    ></nb-icon>
+                    <nb-icon
+                      icon="trash-outline"
+                      pack="eva"
+                      class="flip-icon Deleteicondesign"
+                      (click)="onDeleteConfirm(List.PT_Id)"
+                      *ngIf="currentUser_role !== 'Super_admin'"
+                    ></nb-icon>
+                  </span>
+                  <span *ngIf="List.status == 'I'">
+                    <nb-icon
+                      icon="edit-outline"
+                      pack="eva"
+                      class="flip-icon Editicondesign"
+                      style="pointer-events: none; background-color: #0095ff9c"
+                      (click)="view(mill.Mill_id)"
+                      *ngIf="currentUser_role !== 'Super_admin'"
+                    ></nb-icon>
+                    <nb-icon
+                      icon="eye"
+                      pack="eva"
+                      class="flip-icon Editicondesign"
+                      style="pointer-events: none; background-color: #0095ff9c"
+                    ></nb-icon>
+                    <nb-icon
+                      icon="trash-outline"
+                      pack="eva"
+                      class="flip-icon Deleteicondesign"
+                      style="
+                        pointer-events: none;
+                        background-color: rgba(255, 0, 0, 0.507);
+                      "
+                      (click)="view(mill.Mill_id)"
+                      *ngIf="currentUser_role !== 'Super_admin'"
+                    ></nb-icon>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <ng2-smart-table [settings]="settings" [source]="MillList" (deleteConfirm)="onDeleteConfirm1($event)">
+                </ng2-smart-table>  -->
+        </div>
+        <!-- </nb-card-body>
+          </nb-card> -->
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

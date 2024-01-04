@@ -1,0 +1,38 @@
+<nb-card *ngIf="!loader && dataFound">
+    <nb-card-header>{{displayName}}</nb-card-header>
+    <nb-card-body>
+        <div class="row field-details">
+            <div class="col-sm-6" *ngFor="let field of data.formData; let i=index;">
+                <div class="form-group">
+                    <label class="label">{{field.displayName}} <span class="required"
+                            *ngIf="field.mandatory==='1'">*</span></label>
+                    <input type="text" nbInput fullWidth [(ngModel)]="field.fieldValue"
+                        placeholder="Enter {{field.displayName}}" (change)="updateErrorFields()"
+                        *ngIf="field.dataType==='Character'" [readonly]="field.readOnly">
+                    <input type="number" nbInput fullWidth [(ngModel)]="field.fieldValue" min="0"
+                        placeholder="Enter {{field.displayName}}" (change)="updateErrorFields()"
+                        *ngIf="field.dataType==='Numeric'">
+                    <nb-select [(ngModel)]="field.fieldValue" *ngIf="field.dataType==='Lookup'"
+                        [selected]="field.fieldValue" [(ngModel)]="field.fieldValue">
+                        <nb-option value="">Select {{field.displayName}}</nb-option>
+                        <nb-option *ngFor="let option of field.lookupOptions;" [value]="option.Combo_list">
+                            {{option.Combo_list}}</nb-option>
+                    </nb-select>
+                    <span *ngIf="field.isError" class="error-field"><b>{{field.displayName}}</b>
+                        required</span>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 button-section">
+                <button type="submit" class="save-btn" status="success" [class.disabled]="checkRequiredFields()"
+                    (click)="saveData()" nbButton>{{data.itemId===null ? "Add" : "Update"}}</button>
+                <button type="submit" class="cancel-btn" status="danger" (click)="close()" nbButton>cancel</button>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </nb-card-footer>
+</nb-card>

@@ -1,0 +1,23 @@
+::ng-deep {
+  .form-popup {
+    background: #ffffff;
+    height: 498px;
+    width: 698px;
+    border-radius: 10px;
+  }
+}
+
+.field-details {
+  height: 200px;
+  overflow: auto;
+}
+
+.button-section {
+  text-align: center;
+  .save-btn {
+    margin-right: 4px;
+  }
+  .cancel-btn {
+    margin-left: 4px;
+  }
+}

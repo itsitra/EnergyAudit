@@ -1,0 +1,16 @@
+<nb-card>
+    <nb-card-body>
+        <div class="form-group">
+            <label class="label">Customer</label>
+            <select [(ngModel)]="customerId" class="form-control">
+                <option value="">Choose Customer</option>
+                <option *ngFor="let customer of customerList" [value]="customer.id">
+                    {{ customer.name }}
+                </option>
+            </select>
+        </div>
+        <button type="submit" nbButton fullWidth status="primary" [disabled]="customerId===''" (click)="continue()">
+            Continue
+        </button>
+    </nb-card-body>
+</nb-card>

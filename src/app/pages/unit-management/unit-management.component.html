@@ -1,0 +1,173 @@
+<div class="card">
+  <nb-card>
+    <nb-card-header> Unit Management</nb-card-header>
+    <nb-card-body>
+      <form>
+        <div class="row" *ngIf="isShown">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12" style="float: right">
+                <input
+                  type="button"
+                  style="float: right"
+                  value="Add User"
+                  *ngIf="IsShownAddButton"
+                  (click)="OpenAddUserPopup()"
+                />
+              </div>
+
+              <div class="col-md-12" *ngIf="!IsShownTable" style="width: 100%">
+                <form class="col-md-12 row" style="width: 100%">
+                  <div
+                    *ngFor="let fields of ListOfInput.data; let i = index"
+                    class="col-md-6"
+                  >
+                    <div
+                      class="form-group"
+                      *ngIf="fields.textField"
+                      style="width: 100%"
+                    >
+                      <label
+                        ><b>{{ fields.lable }}</b></label
+                      >
+                      <input
+                        [type]="fields.type"
+                        nbInput
+                        fullWidth
+                        [placeholder]="fields.placeholder"
+                        [name]="fields.name"
+                        [(ngModel)]="fields.value"
+                        (ngModelChange)="doValidation(i)"
+                        required
+                      />
+                      <small class="text-danger" *ngIf="fields.error">{{
+                        fields.errorText
+                      }}</small>
+                      <!-- {{ fields.value }} -->
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      text-align: center;
+                      display: flex;
+                      width: 100%;
+                      justify-content: center;
+                    "
+                  >
+                    <button (click)="onSubmit()" *ngIf="viewOption !== true">
+                      {{ Btn_Name }}
+                    </button>
+                    <button (click)="Back()">Back</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-lg-12" style="float: right">
+          <input
+            type="button"
+            style="float: right"
+            value="Add Unit"
+            *ngIf="IsShownAddButton"
+            (click)="OpenAddMillPopup()"
+          />
+        </div>
+
+        <!-- <nb-card>
+          <nb-card-header>
+            Mill List
+          </nb-card-header>
+          <nb-card-body> -->
+        <div class="table-responsive" *ngIf="IsShownTable">
+          <table #dt class="table table-bordered table-striped">
+            <thead>
+              <tr id="radius">
+                <th>Mill ID</th>
+                <th>Unit Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Contact No</th>
+                <th>Email_Id</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody class="table-bordered">
+              <tr *ngFor="let unit of UnitList; let i = index">
+                <th>{{ unit.Mill_id }}</th>
+                <th>{{ unit.Unit_Name }}</th>
+                <td>{{ unit.city }}</td>
+                <td>{{ unit.state }}</td>
+                <td>{{ unit.Contact_No }}</td>
+                <td>{{ unit.Email_Id }}</td>
+                <td>
+                  <span *ngIf="unit.Status == 'A'">Active</span>
+                  <span *ngIf="unit.Status == 'I'">In Active</span>
+                </td>
+                <td>
+                  <span *ngIf="unit.Status == 'A'">
+                    <nb-icon
+                      icon="edit-outline"
+                      pack="eva"
+                      class="flip-icon Editicondesign"
+                      (click)="Edit(i)"
+                      *ngIf="currentUser_role == 'Super_admin'"
+                    ></nb-icon>
+                    <nb-icon
+                      icon="eye"
+                      pack="eva"
+                      class="flip-icon Editicondesign"
+                      (click)="view(i)"
+                    ></nb-icon>
+                    <nb-icon
+                      icon="trash-outline"
+                      pack="eva"
+                      class="flip-icon Deleteicondesign"
+                      (click)="onDeleteConfirm(unit.Unit_Id, unit.Mill_id)"
+                      *ngIf="currentUser_role == 'Super_admin'"
+                    ></nb-icon>
+                  </span>
+                  <span *ngIf="unit.Status == 'I'">
+                    <nb-icon
+                      icon="edit-outline"
+                      pack="eva"
+                      class="flip-icon Editicondesign"
+                      style="pointer-events: none; background-color: #0095ff9c"
+                      (click)="view(mill.Mill_id)"
+                      *ngIf="currentUser_role == 'Super_admin'"
+                    ></nb-icon>
+                    <nb-icon
+                      icon="eye"
+                      pack="eva"
+                      class="flip-icon Editicondesign"
+                      style="pointer-events: none; background-color: #0095ff9c"
+                    ></nb-icon>
+                    <nb-icon
+                      icon="trash-outline"
+                      pack="eva"
+                      class="flip-icon Deleteicondesign"
+                      style="
+                        pointer-events: none;
+                        background-color: rgba(255, 0, 0, 0.507);
+                      "
+                      (click)="view(mill.Mill_id)"
+                      *ngIf="currentUser_role == 'Super_admin'"
+                    ></nb-icon>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <ng2-smart-table [settings]="settings" [source]="MillList" (deleteConfirm)="onDeleteConfirm1($event)">
+                </ng2-smart-table>  -->
+        </div>
+        <!-- </nb-card-body>
+          </nb-card> -->
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

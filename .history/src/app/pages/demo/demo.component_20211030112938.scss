@@ -1,0 +1,78 @@
+:host ::ng-deep nb-stepper .step-content {
+  text-align: center;
+
+  button {
+    cursor: pointer;
+    margin: 0.5rem;
+  }
+}
+
+.custom-card {
+  margin: auto;
+  cursor: pointer;
+  .flow-card {
+    border-radius: 10px;
+    .container {
+      display: grid;
+      grid-template-columns: 76% 16%;
+      grid-column-gap: 8%;
+      .title {
+        h4 {
+          font-size: 24px !important;
+          margin-top: 8%;
+        }
+      }
+      .navigate-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+        background-color: #9b5de5 !important;
+        i {
+          margin-left: 30%;
+          margin-top: 32%;
+          font-size: 24px;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
+.form-data {
+  .first-form {
+    margin-top: 24px;
+    .form-data {
+      display: grid;
+      grid-template-columns: 60% 18% 18%;
+      grid-column-gap: 2%;
+      .input-field {
+        label {
+          float: left;
+        }
+      }
+      .add-button {
+        .navigate-button {
+          width: 40px;
+          height: 40px;
+          border-radius: 50px;
+          margin-top: 22px;
+          background-image: linear-gradient(to right, #2ce69b, #00d68f);
+          border: none;
+          box-shadow: 0 0 0 0 #00b887, 0 0 0 0 #00997a, 0 0 transparent;
+          color: #ffffff;
+          &:hover {
+            cursor: pointer;
+          }
+          i {
+            margin-left: 0%;
+            margin-top: 28%;
+            font-size: 18px;
+            color: #ffffff;
+          }
+        }
+      }
+      .next-step {
+        margin-top: 0px;
+      }
+    }
+  }
+}

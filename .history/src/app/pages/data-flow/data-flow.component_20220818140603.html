@@ -1,0 +1,187 @@
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-tabset>
+        <!-- Flow 1 -->
+        <nb-tab tabTitle="Flow 1">
+            <nb-card-header>
+                <div class="flow-steps" *ngIf="flowPaths.length>0">
+                    <div class="path" *ngFor="let path of flowPaths; let j=index;" (click)="gotoLevel(path)">
+                        <nb-icon icon="arrow-ios-forward" *ngIf="j!==0" pack="eva"></nb-icon>
+                        <nb-icon icon="folder" style="margin-right: 8px;" *ngIf="j===0" pack="eva"></nb-icon> <span
+                            class="text">{{path.name}}</span>
+                    </div>
+                </div>
+            </nb-card-header>
+            <nb-card-body>
+                <nb-stepper [disableStepNavigation]="true" [selectedIndex]="activeLevelIndex" orientation="horizontal"
+                    *ngIf="flowData.FlowOne.Data.length>0">
+                    <nb-step [label]="levelData.Level_Name"
+                        *ngFor="let levelData of flowData.FlowOne.Data; let i=index;">
+                        <!-- Level count -->
+                        <div class="first-row main-row row">
+                            <!-- single level -->
+                            <ng-container *ngIf="levelData.Level_Data.length===1">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6">
+                                    <input type="number" nbInput
+                                        placeholder="Enter No. of {{levelData.Level_Data[0].Item_Name}}"
+                                        class="form-control count" min="0"
+                                        [(ngModel)]="levelData.Level_Data[0].Item_Count"
+                                        (change)="LevelCountUpdateEvent(levelData.Level_Data[0])" />
+                                </div>
+                                <div class="col-sm-3"></div>
+                            </ng-container>
+                            <!-- double level -->
+                            <ng-container *ngIf="levelData.Level_Data.length===2">
+                                <div class="col-sm-5">
+                                    <input type="number" nbInput
+                                        placeholder="Enter No. of {{levelData.Level_Data[0].Item_Name}}"
+                                        class="form-control count" min="0"
+                                        [(ngModel)]="levelData.Level_Data[0].Item_Count"
+                                        (change)="LevelCountUpdateEvent(levelData.Level_Data[0])" />
+                                </div>
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-5">
+                                    <input type="number" nbInput
+                                        placeholder="Enter No. of {{levelData.Level_Data[1].Item_Name}}"
+                                        class="form-control count" min="0"
+                                        [(ngModel)]="levelData.Level_Data[1].Item_Count"
+                                        (change)="LevelCountUpdateEvent(levelData.Level_Data[1])" />
+                                </div>
+                            </ng-container>
+                        </div>
+
+                        <!-- Level Data -->
+                        <div class="datas">
+                            <!-- single level -->
+                            <ng-container *ngIf="levelData.Level_Data.length===1">
+                                <div class="first-row row"
+                                    *ngFor="let ItemData of getCurrentlevelDetails(levelData.Level_Data[0]); let i=index;">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-6">
+                                        <div class="form-data">
+                                            <div class="input-field">
+                                                <div class="form-group">
+                                                    <label class="label">{{ItemData.ItemName}}
+                                                        {{i+1}}</label>
+                                                    <input type="text" class="form-control" [(ngModel)]="ItemData.Name"
+                                                        placeholder="Enter {{ItemData.ItemName}} {{i+1}}" />
+                                                </div>
+                                            </div>
+                                            <div class="add-button">
+                                                <div class="navigate-button active" *ngIf="ItemData.Name!==''"
+                                                    (click)="addFormDatas(ItemData,i)" title="Add Master">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                </div>
+                                                <div class="navigate-button" *ngIf="ItemData.Name===''"
+                                                    title="Add Master">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                </div>
+                                            </div>
+                                            <div class="next-step">
+                                                <button nbButton
+                                                    class="size-medium shape-rectangle appearance-hero status-info ng-star-inserted nb-transition"
+                                                    nbButton nbStepperNext
+                                                    [class.active]="ItemData.NextButtonEnableStatus"
+                                                    [disabled]="!ItemData.NextButtonEnableStatus"
+                                                    (click)="nextLevel(ItemData)">
+                                                    <i class="fas fa-arrow-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                            </ng-container>
+                            <!-- double level -->
+                            <ng-container *ngIf="levelData.Level_Data.length===2">
+                                <div class="first-row row">
+                                    <div class="col-sm-6">
+                                        <ng-container
+                                            *ngFor="let ItemData of getCurrentlevelDetails(levelData.Level_Data[0]); let i=index;">
+                                            <div class="form-data">
+                                                <div class="input-field">
+                                                    <div class="form-group">
+                                                        <label class="label">{{ItemData.ItemName}}
+                                                            {{i+1}}</label>
+                                                        <input type="text" class="form-control"
+                                                            [(ngModel)]="ItemData.Name"
+                                                            placeholder="Enter {{ItemData.ItemName}} {{i+1}}" />
+                                                    </div>
+                                                </div>
+                                                <div class="add-button">
+                                                    <div class="navigate-button active" *ngIf="ItemData.Name!==''"
+                                                        (click)="addFormDatas(ItemData,i)" title="Add Master">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </div>
+                                                    <div class="navigate-button" *ngIf="ItemData.Name===''"
+                                                        title="Add Master">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="next-step">
+                                                    <button nbButton
+                                                        class="size-medium shape-rectangle appearance-hero status-info ng-star-inserted nb-transition"
+                                                        nbButton nbStepperNext
+                                                        [class.active]="ItemData.NextButtonEnableStatus"
+                                                        [disabled]="!ItemData.NextButtonEnableStatus"
+                                                        (click)="nextLevel(ItemData)">
+                                                        <i class="fas fa-arrow-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <ng-container
+                                            *ngFor="let ItemData of getCurrentlevelDetails(levelData.Level_Data[1]); let i=index;">
+                                            <div class="form-data">
+                                                <div class="input-field">
+                                                    <div class="form-group">
+                                                        <label class="label">{{ItemData.ItemName}}
+                                                            {{i+1}}</label>
+                                                        <input type="text" class="form-control"
+                                                            [(ngModel)]="ItemData.Name"
+                                                            placeholder="Enter {{ItemData.ItemName}} {{i+1}}" />
+                                                    </div>
+                                                </div>
+                                                <div class="add-button">
+                                                    <div class="navigate-button active" *ngIf="ItemData.Name!==''"
+                                                        (click)="addFormDatas(ItemData,i)" title="Add Master">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </div>
+                                                    <div class="navigate-button" *ngIf="ItemData.Name===''"
+                                                        title="Add Master">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="next-step">
+                                                    <button nbButton
+                                                        class="size-medium shape-rectangle appearance-hero status-info ng-star-inserted nb-transition"
+                                                        nbButton nbStepperNext
+                                                        [class.active]="ItemData.NextButtonEnableStatus"
+                                                        [disabled]="!ItemData.NextButtonEnableStatus"
+                                                        (click)="nextLevel(ItemData)">
+                                                        <i class="fas fa-arrow-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </nb-step>
+                </nb-stepper>
+            </nb-card-body>
+        </nb-tab>
+        <nb-tab tabTitle="Flow 2">
+            <span>Content #2</span>
+        </nb-tab>
+        <nb-tab tabTitle="Flow 3">
+            <span>Content #3</span>
+        </nb-tab>
+        <nb-tab tabTitle="Flow 4">
+            <span>Content #4</span>
+        </nb-tab>
+    </nb-tabset>
+</nb-card>

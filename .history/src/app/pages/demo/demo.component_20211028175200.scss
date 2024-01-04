@@ -1,0 +1,55 @@
+:host ::ng-deep nb-stepper .step-content {
+  text-align: center;
+
+  button {
+    cursor: pointer;
+    margin: 0.5rem;
+  }
+}
+
+.custom-card {
+  margin: auto;
+  cursor: pointer;
+  .flow-card {
+    border-radius: 10px;
+    .container {
+      display: grid;
+      grid-template-columns: 76% 16%;
+      grid-column-gap: 8%;
+      .title {
+        h4 {
+          font-size: 24px !important;
+          margin-top: 8%;
+        }
+      }
+      .navigate-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+        background-color: #9b5de5 !important;
+        i {
+          margin-left: 30%;
+          margin-top: 32%;
+          font-size: 24px;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
+
+nb-checkbox {
+  margin-bottom: 1rem;
+}
+
+.form-inline [fullWidth] {
+  flex: 1;
+}
+
+.form-inline > * {
+  margin: 0 1.5rem 1.5rem 0;
+}
+
+nb-card.inline-form-card nb-card-body {
+  padding-bottom: 0;
+}

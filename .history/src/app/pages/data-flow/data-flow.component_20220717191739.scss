@@ -1,0 +1,65 @@
+:host ::ng-deep nb-stepper .step-content {
+  text-align: center;
+
+  button {
+    cursor: pointer;
+    margin: 0.5rem;
+  }
+}
+
+.first-row {
+  margin-top: 24px;
+  .form-data {
+    display: grid;
+    grid-template-columns: 60% 18% 18%;
+    grid-column-gap: 2%;
+    .input-field {
+      label {
+        float: left;
+      }
+    }
+    .add-button {
+      margin-left: 18px;
+      .navigate-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50px;
+        margin-top: 22px;
+        background-image: linear-gradient(to right, #2ce69b, #00d68f);
+        border: none;
+        box-shadow: 0 0 0 0 #00b887, 0 0 0 0 #00997a, 0 0 transparent;
+        color: #ffffff;
+        &:hover {
+          cursor: pointer;
+        }
+        i {
+          margin-left: 0%;
+          margin-top: 28%;
+          font-size: 18px;
+          color: #ffffff;
+        }
+        opacity: 0.5;
+        &.active {
+          opacity: 1;
+        }
+      }
+    }
+    .next-step {
+      button {
+        margin-top: 24px;
+        opacity: 0.5;
+        background-image: linear-gradient(
+          to right,
+          #42aaff,
+          #0095ff
+        ) !important;
+        border: none !important;
+        box-shadow: 0 0 0 0 #006fd6, 0 0 0 0 #0057c2, 0 0 transparent !important;
+        color: #ffffff !important;
+        &.active {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

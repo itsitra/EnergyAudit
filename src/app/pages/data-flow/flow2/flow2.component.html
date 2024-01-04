@@ -1,0 +1,80 @@
+<nb-card-header>
+    <div class="flow-steps" *ngIf="flowPaths.length>0">
+        <div class="path" *ngFor="let path of flowPaths; let j=index;" (click)="gotoLevel(path)">
+            <nb-icon icon="arrow-ios-forward" *ngIf="j!==0" pack="eva"></nb-icon>
+            <nb-icon icon="folder" style="margin-right: 8px;" *ngIf="j===0" pack="eva"></nb-icon> <span
+                class="text">{{path.name}}</span>
+        </div>
+    </div>
+</nb-card-header>
+<nb-card-body>
+    <nb-stepper [disableStepNavigation]="true" [selectedIndex]="activeLevelIndex" orientation="horizontal"
+        *ngIf="flowData.Flow2.Data.length>0">
+        <nb-step [label]="levelData.Level_Name" *ngFor="let levelData of flowData.Flow2.Data; let i=index;">
+            <div class="first-row main-row row" *ngIf="levelData.Level_Data.length>0">
+                <!-- Level count & data -->
+                <ng-container *ngFor="let LevelData of levelData.Level_Data;">
+                    <div class="col-sm-6" *ngIf="displayCheck(LevelData)">
+                        <div class="container level-{{i}}">
+                            <nb-card-header>
+                                <p class="level-name">{{ LevelData.Item_Name }}</p>
+                            </nb-card-header>
+                            <nb-card-body>
+                                <div class="row">
+                                    <ng-container class="level-count">
+                                        <div class="col-sm-1"></div>
+                                        <div class="col-sm-10" style="padding-bottom: 24px;">
+                                            <input type="number" nbInput
+                                                placeholder="Enter No. of {{LevelData.Item_Name}}"
+                                                class="form-control count" min="0" [(ngModel)]="LevelData.Item_Count"
+                                                (change)="LevelCountUpdateEvent(LevelData)" />
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </ng-container>
+                                    <ng-container class="level-data"
+                                        *ngFor="let ItemData of getCurrentlevelDetails(LevelData); let i=index;">
+                                        <div class="col-sm-1"></div>
+                                        <div class="col-sm-10" style="padding-bottom: 24px;">
+                                            <div class="form-data">
+                                                <div class="input-field">
+                                                    <div class="form-group">
+                                                        <label class="label">{{ItemData.ItemName}}
+                                                            {{i+1}}</label>
+                                                        <input type="text" class="form-control"
+                                                            [(ngModel)]="ItemData.Name"
+                                                            placeholder="Enter {{ItemData.ItemName}} {{i+1}}" />
+                                                    </div>
+                                                </div>
+                                                <div class="add-button">
+                                                    <div class="navigate-button active" *ngIf="ItemData.Name!==''"
+                                                        (click)="addFormDatas(ItemData,i)" title="Add Master">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </div>
+                                                    <div class="navigate-button" *ngIf="ItemData.Name===''"
+                                                        title="Add Master">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="next-step">
+                                                    <button nbButton
+                                                        class="size-medium shape-rectangle appearance-hero status-info ng-star-inserted nb-transition"
+                                                        nbButton nbStepperNext
+                                                        [class.active]="ItemData.NextButtonEnableStatus"
+                                                        [disabled]="!ItemData.NextButtonEnableStatus"
+                                                        (click)="nextLevel(ItemData)">
+                                                        <i class="fas fa-arrow-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </ng-container>
+                                </div>
+                            </nb-card-body>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </nb-step>
+    </nb-stepper>
+</nb-card-body>

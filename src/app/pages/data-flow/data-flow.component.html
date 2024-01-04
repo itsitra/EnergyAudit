@@ -1,0 +1,37 @@
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-tabset (changeTab)="tabChanging($event)">
+        <nb-tab tabTitle="F-1" tabId="1">
+            <ngx-flow1 [customerId]="customerId" *ngIf="activeTabId==='1'"></ngx-flow1>
+        </nb-tab>
+        <nb-tab tabTitle="F-2" tabId="2">
+            <ngx-flow2 [customerId]="customerId" *ngIf="activeTabId==='2'"></ngx-flow2>
+        </nb-tab>
+        <nb-tab tabTitle="F-3" tabId="3">
+            <ngx-flow3 [customerId]="customerId" *ngIf="activeTabId==='3'"></ngx-flow3>
+        </nb-tab>
+        <nb-tab tabTitle="F-4" tabId="4">
+            <ngx-flow4 [customerId]="customerId" *ngIf="activeTabId==='4'"></ngx-flow4>
+        </nb-tab>
+        <nb-tab tabTitle="F-5" tabId="5">
+            <ngx-flow5 [customerId]="customerId" *ngIf="activeTabId==='5'"></ngx-flow5>
+        </nb-tab>
+        <nb-tab tabTitle="F-6" tabId="6">
+            <ngx-flow6 [customerId]="customerId" *ngIf="activeTabId==='6'"></ngx-flow6>
+        </nb-tab>
+        <nb-tab tabTitle="F-7" tabId="7">
+            <ngx-flow7 [customerId]="customerId" *ngIf="activeTabId==='7'"></ngx-flow7>
+        </nb-tab>
+        <nb-tab tabTitle="F-8" tabId="8">
+            <ngx-flow8 [customerId]="customerId" *ngIf="activeTabId==='8'"></ngx-flow8>
+        </nb-tab>
+        <nb-tab tabTitle="F-9" tabId="9">
+            <ngx-flow9 [customerId]="customerId" *ngIf="activeTabId==='9'"></ngx-flow9>
+        </nb-tab>
+        <nb-tab tabTitle="F-10" tabId="10">
+            <ngx-flow10 [customerId]="customerId" *ngIf="activeTabId==='10'"></ngx-flow10>
+        </nb-tab>
+        <nb-tab tabTitle="F-11" tabId="11">
+            <ngx-flow11 [customerId]="customerId" *ngIf="activeTabId==='11'"></ngx-flow11>
+        </nb-tab>
+    </nb-tabset>
+</nb-card>

@@ -1,0 +1,65 @@
+<nb-card>
+    <nb-card-header>{{ title }}</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputPower" class="label">Power (kw)</label>
+                    <input type="text" nbInput fullWidth id="inputPower" placeholder="Power (kw)">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputCapacity" class="label">Capacity</label>
+                    <input type="text" nbInput fullWidth id="inputCapacity" placeholder="Capacity">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputTemperature" class="label">Temperature Range</label>
+                    <input type="text" nbInput fullWidth id="inputTemperature" placeholder="Temperature Range">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputFrequency" class="label">Frequency (GHZ)</label>
+                    <input type="text" nbInput fullWidth id="inputFrequency" placeholder="Frequency (GHZ)">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputWarranty" class="label">Warranty</label>
+                    <input type="text" nbInput fullWidth id="inputWarranty" placeholder="Warranty">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputvoltage" class="label">Voltage (V)</label>
+                    <input type="text" nbInput fullWidth id="inputvoltage" placeholder="Voltage (V)">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputmaxcurrent" class="label">Max Current</label>
+                    <input type="text" nbInput fullWidth id="inputmaxcurrent" placeholder="Max Current">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputserialnumber" class="label">Serial Number</label>
+                    <input type="text" nbInput fullWidth id="inputserialnumber" placeholder="Serial Number">
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton hero status="primary" (click)="dismiss()">Save</button>
+        <button nbButton hero status="danger" style="margin-left:8px;" (click)="dismiss()">Close</button>
+    </nb-card-footer>
+</nb-card>

@@ -1,0 +1,608 @@
+<div class="col-md-4 custom-card" *ngIf="!openSteps">
+  <nb-card class="flow-card" (click)="openFlow(flow.id)" *ngFor="let flow of flowsData">
+    <nb-card-body>
+      <div class="container">
+        <div class="title">
+          <h4>{{ flow.name }}</h4>
+        </div>
+        <div class="navigate-button">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<div class="form-data row" *ngIf="openSteps">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card">
+      <nb-card-header>Flow {{ activeFlow }}</nb-card-header>
+      <nb-card-body>
+        <nb-stepper #stepper>
+          <nb-step [stepControl]="firstForm" label="Power Transformer">
+            <div class="first-row main-row row">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-6">
+                <input type="number" nbInput placeholder="Enter the No. of Power Transfomers" class="form-control count"
+                  [(ngModel)]="firstLevelCount" (keyup)="setValue(firstLevelCount)" />
+              </div>
+              <div class="col-sm-3"></div>
+            </div>
+            <form [formGroup]="firstForm" class="step-container first-form" *ngIf="firstLevelCount > 0">
+              <div class="first-row row" *ngFor="let item of counter(firstLevelCount); let i = index">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="form-data">
+                    <div class="input-field">
+                      <div class="form-group">
+                        <label for="inputFirst{{i}}" class="label">Power Transformer {{i+1}}</label>
+                        <input type="text" class="form-control" placeholder="Enter Transformer {{i+1}} Value"
+                          formControlName="firstCtrl-{{i}}" id="inputFirst{{i}}"
+                          [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}" />
+                      </div>
+                    </div>
+                    <div class="add-button">
+                      <div class="navigate-button" (click)="opentransformersMaster(i,1)" title="Add Master">
+                        <i class="fas fa-plus-circle"></i>
+                      </div>
+                    </div>
+                    <div class="next-step">
+                      <button nbButton
+                        class="size-medium shape-rectangle appearance-hero status-info ng-star-inserted nb-transition"
+                        [disabled]="firstForm.invalid" nbButton nbStepperNext>
+                        <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3"></div>
+              </div>
+              <!-- <button nbButton nbStepperNext>next</button> -->
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="secondForm" label="Distribution Transformer">
+            <div class="second-row main-row row">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-6">
+                <input type="number" placeholder="Enter the No. of Distribution Transfomers" class="form-control count"
+                  [(ngModel)]="secondLevelCount" />
+              </div>
+              <div class="col-sm-3"></div>
+            </div>
+            <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container second-form"
+              *ngIf="secondLevelCount > 0">
+              <div class="first-row row" *ngFor="let item of counter(secondLevelCount); let i = index">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="form-data">
+                    <div class="input-field">
+                      <div class="form-group">
+                        <label for="inputFirst{{i}}" class="label">Distribution Transformer {{i+1}}</label>
+                        <input type="text" class="form-control" placeholder="Enter Transformer {{i+1}} Value"
+                          formControlName="firstCtrl-{{i}}" id="inputFirst{{i}}"
+                          [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}" />
+                      </div>
+                    </div>
+                    <div class="add-button">
+                      <div class="navigate-button" (click)="opentransformersMaster(i,2)" title="Add Master">
+                        <i class="fas fa-plus-circle"></i>
+                      </div>
+                    </div>
+                    <div class="next-step">
+                      <button nbButton
+                        class="size-medium shape-rectangle appearance-hero status-info ng-star-inserted nb-transition"
+                        [disabled]="secondForm.invalid" nbButton nbStepperNext>
+                        <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3"></div>
+              </div>
+              <!-- <button nbButton nbStepperNext>next</button> -->
+            </form>
+
+
+
+
+
+
+
+            <div class="input-group col-lg-4 mt-4 mb-5">
+              <input type="number" placeholder="Enter the No. of Distribution Transfomers" class="form-control count"
+                [(ngModel)]="secondLevelCount" />
+            </div>
+            <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container"
+              *ngIf="secondLevelCount > 0">
+              <div class="
+                      col-lg-6
+                      input-group
+                      mt-4
+                      mb-3
+                      d-flex
+                      align-items-center
+                      justify-content-center
+                    " *ngFor="let item of counter(secondLevelCount)">
+                <input type="text" class="form-control" formControlName="secondCtrl" [ngClass]="{
+                        'form-control-danger':
+                          secondForm.invalid &&
+                          (secondForm.dirty || secondForm.touched)
+                      }" />
+                <button class="
+                        font-weight-bold
+                        circle
+                        mini
+                        text-white
+                        rounded-circle
+                        d-flex
+                        align-items-center
+                        justify-content-center
+                        position-relative
+                        border border-white
+                        round-circle
+                      " [disabled]="secondForm.invalid" nbButton nbStepperNext>
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <!-- <button nbButton nbStepperPrevious>prev</button>
+                  <button nbButton nbStepperNext>next</button> -->
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="thirdForm" label="Power House">
+            <div class="input-group col-lg-4 mt-4 mb-5">
+              <input type="number" placeholder="Enter the No. of Power House" class="form-control count"
+                [(ngModel)]="thirdLevelCount" />
+            </div>
+            <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container"
+              *ngIf="thirdLevelCount > 0">
+              <div class="
+                      col-lg-6
+                      input-group
+                      mt-4
+                      mb-3
+                      d-flex
+                      align-items-center
+                      justify-content-center
+                    " *ngFor="let item of counter(thirdLevelCount)">
+                <input type="text" class="form-control" formControlName="thirdCtrl" [ngClass]="{
+                        'form-control-danger':
+                          thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)
+                      }" />
+                <button class="
+                        font-weight-bold
+                        circle
+                        mini
+                        text-white
+                        rounded-circle
+                        d-flex
+                        align-items-center
+                        justify-content-center
+                        position-relative
+                        border border-white
+                        round-circle
+                      " [disabled]="thirdForm.invalid" nbButton nbStepperNext>
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <!-- <button nbButton nbStepperPrevious>prev</button>
+                  <button nbButton nbStepperNext>Confirm</button> -->
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="fourthForm" label="MV Panel">
+            <div class="row show-grid">
+              <div class="col-6">
+                <div class="input-group col-lg-10">
+                  <input type="number" placeholder="Enter the No. of MV Panel 1" class="form-control count"
+                    [(ngModel)]="fourthLevel1Count" />
+                </div>
+                <form [formGroup]="fourthForm" (ngSubmit)="onFourthSubmit()" class="step-container"
+                  *ngIf="fourthLevel1Count > 0">
+                  <div class="
+                          col-lg-12
+                          input-group
+                          mt-4
+                          mb-3
+                          d-flex
+                          align-items-center
+                          justify-content-center
+                        " *ngFor="let item of counter(fourthLevel1Count)">
+                    <input type="text" class="form-control" formControlName="fourthPanel1Ctrl" [ngClass]="{
+                            'form-control-danger':
+                              fourthForm.invalid &&
+                              (fourthForm.dirty || fourthForm.touched)
+                          }" />
+                    <button class="
+                            font-weight-bold
+                            circle
+                            mini
+                            text-white
+                            rounded-circle
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                            position-relative
+                            border border-white
+                            round-circle
+                          " [disabled]="fourthForm.invalid" nbButton nbStepperNext>
+                      <i class="fas fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="col-6">
+                <div class="input-group col-lg-10">
+                  <input type="number" placeholder="Enter the No. of MV Panel 2" class="form-control count"
+                    [(ngModel)]="fourthLevel2Count" />
+                </div>
+                <form [formGroup]="fourthForm" (ngSubmit)="onFourthSubmit()" class="step-container"
+                  *ngIf="fourthLevel2Count > 0">
+                  <div class="
+                          col-lg-12
+                          input-group
+                          mt-4
+                          mb-3
+                          d-flex
+                          align-items-center
+                          justify-content-center
+                        " *ngFor="let item of counter(fourthLevel2Count)">
+                    <input type="text" class="form-control" formControlName="fourthPanel2Ctrl" [ngClass]="{
+                            'form-control-danger':
+                              fourthForm.invalid &&
+                              (fourthForm.dirty || fourthForm.touched)
+                          }" />
+                    <button class="
+                            font-weight-bold
+                            circle
+                            mini
+                            text-white
+                            rounded-circle
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                            position-relative
+                            border border-white
+                            round-circle
+                          " [disabled]="fourthForm.invalid" nbButton nbStepperNext>
+                      <i class="fas fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </nb-step>
+          <nb-step [stepControl]="fifthForm" label="Capacitor / Department Feeder">
+            <div class="row show-grid">
+              <div class="col-6 row">
+                <div class="col-6">
+                  <div class="input-group col-lg-12">
+                    <input type="number" placeholder="Enter the No. of Capacitor 1" class="form-control count"
+                      [(ngModel)]="capacitor1" />
+                  </div>
+                  <form [formGroup]="fifthForm" (ngSubmit)="onFifthSubmit()" class="step-container"
+                    *ngIf="capacitor1 > 0">
+                    <div class="
+                            col-lg-12
+                            input-group
+                            mt-4
+                            mb-3
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                          " *ngFor="let item of counter(capacitor1)">
+                      <input type="text" class="form-control" formControlName="capacitor1Ctrl" [ngClass]="{
+                              'form-control-danger':
+                                fifthForm.invalid &&
+                                (fifthForm.dirty || fifthForm.touched)
+                            }" />
+                      <button class="
+                              font-weight-bold
+                              circle
+                              mini
+                              text-white
+                              rounded-circle
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                              position-relative
+                              border border-white
+                              round-circle
+                            " [disabled]="fifthForm.invalid" nbButton nbStepperNext>
+                        <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-6">
+                  <div class="input-group col-lg-12">
+                    <input type="number" placeholder="Enter the No. of Capacitor 2" class="form-control count"
+                      [(ngModel)]="capacitor2" />
+                  </div>
+                  <form [formGroup]="fifthForm" (ngSubmit)="onFifthSubmit()" class="step-container"
+                    *ngIf="capacitor2 > 0">
+                    <div class="
+                            col-lg-12
+                            input-group
+                            mt-4
+                            mb-3
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                          " *ngFor="let item of counter(capacitor2)">
+                      <input type="text" class="form-control" formControlName="capacitor2Ctrl" [ngClass]="{
+                              'form-control-danger':
+                                fifthForm.invalid &&
+                                (fifthForm.dirty || fifthForm.touched)
+                            }" />
+                      <button class="
+                              font-weight-bold
+                              circle
+                              mini
+                              text-white
+                              rounded-circle
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                              position-relative
+                              border border-white
+                              round-circle
+                            " [disabled]="fifthForm.invalid" nbButton nbStepperNext>
+                        <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-6 row">
+                <div class="col-6">
+                  <div class="input-group col-lg-12">
+                    <input type="number" placeholder="Enter the No. of Department Feeder 1" class="form-control count"
+                      [(ngModel)]="Feeder1" />
+                  </div>
+                  <form [formGroup]="fifthForm" (ngSubmit)="onFifthSubmit()" class="step-container" *ngIf="Feeder1 > 0">
+                    <div class="
+                            col-lg-12
+                            input-group
+                            mt-4
+                            mb-3
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                          " *ngFor="let item of counter(Feeder1)">
+                      <input type="text" class="form-control" formControlName="Feeder1Ctrl" [ngClass]="{
+                              'form-control-danger':
+                                fifthForm.invalid &&
+                                (fifthForm.dirty || fifthForm.touched)
+                            }" />
+                      <button class="
+                              font-weight-bold
+                              circle
+                              mini
+                              text-white
+                              rounded-circle
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                              position-relative
+                              border border-white
+                              round-circle
+                            " [disabled]="fifthForm.invalid" nbButton nbStepperNext>
+                        <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-6">
+                  <div class="input-group col-lg-12">
+                    <input type="number" placeholder="Enter the No. of Department Feeder 2" class="form-control count"
+                      [(ngModel)]="Feeder2" />
+                  </div>
+                  <form [formGroup]="fifthForm" (ngSubmit)="onFifthSubmit()" class="step-container" *ngIf="Feeder2 > 0">
+                    <div class="
+                            col-lg-12
+                            input-group
+                            mt-4
+                            mb-3
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                          " *ngFor="let item of counter(Feeder2)">
+                      <input type="text" class="form-control" formControlName="Feeder2Ctrl" [ngClass]="{
+                              'form-control-danger':
+                                fifthForm.invalid &&
+                                (fifthForm.dirty || fifthForm.touched)
+                            }" />
+                      <button class="
+                              font-weight-bold
+                              circle
+                              mini
+                              text-white
+                              rounded-circle
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                              position-relative
+                              border border-white
+                              round-circle
+                            " [disabled]="fifthForm.invalid" nbButton nbStepperNext>
+                        <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </nb-step>
+          <nb-step [stepControl]="sixthForm" label="Capacitor / Distribution Board">
+            <div class="row show-grid">
+              <div class="col-6 row">
+                <div class="col-6">
+                  <div class="input-group col-lg-12">
+                    <input type="number" placeholder="Enter the No. of Capacitor 1" class="form-control count"
+                      [(ngModel)]="dfcapacitor1" />
+                  </div>
+                  <form [formGroup]="sixthForm" (ngSubmit)="onSixthSubmit()" class="step-container"
+                    *ngIf="dfcapacitor1 > 0">
+                    <div class="
+                            col-lg-12
+                            input-group
+                            mt-4
+                            mb-3
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                          " *ngFor="let item of counter(dfcapacitor1)">
+                      <input type="text" class="form-control" formControlName="dfcapacitor1Ctrl" [ngClass]="{
+                              'form-control-danger':
+                                sixthForm.invalid &&
+                                (sixthForm.dirty || sixthForm.touched)
+                            }" />
+                      <button class="
+                              font-weight-bold
+                              circle
+                              mini
+                              text-white
+                              rounded-circle
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                              position-relative
+                              border border-white
+                              round-circle
+                            " [disabled]="sixthForm.invalid" nbButton nbStepperNext>
+                        <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-6">
+                  <div class="input-group col-lg-12">
+                    <input type="number" placeholder="Enter the No. of Capacitor 2" class="form-control count"
+                      [(ngModel)]="dfcapacitor2" />
+                  </div>
+                  <form [formGroup]="sixthForm" (ngSubmit)="onFifthSubmit()" class="step-container"
+                    *ngIf="dfcapacitor2 > 0">
+                    <div class="
+                            col-lg-12
+                            input-group
+                            mt-4
+                            mb-3
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                          " *ngFor="let item of counter(dfcapacitor2)">
+                      <input type="text" class="form-control" formControlName="dfcapacitor2Ctrl" [ngClass]="{
+                              'form-control-danger':
+                                sixthForm.invalid &&
+                                (sixthForm.dirty || sixthForm.touched)
+                            }" />
+                      <button class="
+                              font-weight-bold
+                              circle
+                              mini
+                              text-white
+                              rounded-circle
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                              position-relative
+                              border border-white
+                              round-circle
+                            " [disabled]="sixthForm.invalid" nbButton nbStepperNext>
+                        <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-6 row">
+                <div class="col-6">
+                  <div class="input-group col-lg-12">
+                    <input type="number" placeholder="Enter the No. of Distribution Board 1" class="form-control count"
+                      [(ngModel)]="distribution1" />
+                  </div>
+                  <form [formGroup]="sixthForm" (ngSubmit)="onSixthSubmit()" class="step-container"
+                    *ngIf="distribution1 > 0">
+                    <div class="
+                            col-lg-12
+                            input-group
+                            mt-4
+                            mb-3
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                          " *ngFor="let item of counter(distribution1)">
+                      <input type="text" class="form-control" formControlName="distribution1Ctrl" [ngClass]="{
+                              'form-control-danger':
+                                sixthForm.invalid &&
+                                (sixthForm.dirty || sixthForm.touched)
+                            }" />
+                      <button class="
+                              font-weight-bold
+                              circle
+                              mini
+                              text-white
+                              rounded-circle
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                              position-relative
+                              border border-white
+                              round-circle
+                            " [disabled]="sixthForm.invalid" nbButton nbStepperNext>
+                        <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-6">
+                  <div class="input-group col-lg-12">
+                    <input type="number" placeholder="Enter the No. of Distribution Board 2" class="form-control count"
+                      [(ngModel)]="distribution2" />
+                  </div>
+                  <form [formGroup]="sixthForm" (ngSubmit)="onSixthSubmit()" class="step-container"
+                    *ngIf="distribution2 > 0">
+                    <div class="
+                            col-lg-12
+                            input-group
+                            mt-4
+                            mb-3
+                            d-flex
+                            align-items-center
+                            justify-content-center
+                          " *ngFor="let item of counter(distribution2)">
+                      <input type="text" class="form-control" formControlName="distribution2Ctrl" [ngClass]="{
+                              'form-control-danger':
+                                sixthForm.invalid &&
+                                (sixthForm.dirty || sixthForm.touched)
+                            }" />
+                      <button class="
+                              font-weight-bold
+                              circle
+                              mini
+                              text-white
+                              rounded-circle
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                              position-relative
+                              border border-white
+                              round-circle
+                            " [disabled]="sixthForm.invalid" nbButton nbStepperNext>
+                        <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </nb-step>
+          <nb-step [stepControl]="sixthForm" [hidden]="true" label="Sixth level">
+            <div class="step-container">
+              <h3>completed!</h3>
+            </div>
+          </nb-step>
+        </nb-stepper>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

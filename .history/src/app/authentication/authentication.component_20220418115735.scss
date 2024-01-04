@@ -1,0 +1,57 @@
+//variables
+$notDesktop: 980px; //other than desktop
+
+// //public
+
+.wrapper {
+  color: #222b45;
+  padding: 0px !important  ;
+  background-image: url("/src/assets/images/bg.jpg") no-repeat center center
+    fixed;
+}
+
+.from-box-wrapper {
+  width: 50%;
+}
+
+.form-box {
+  background-color: #ffffff;
+  border: 0.0625rem solid #e4e9f2;
+  border-radius: 0.25rem;
+  box-shadow: none;
+  color: #222b45;
+  font-family: Open Sans, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  margin-bottom: 1.875rem;
+  box-shadow: rgb(43 43 153 / 20%) 0px 7px 29px 0px;
+  flex: 1;
+  -ms-flex: 1 1 auto;
+  overflow: auto;
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
+// tag styles
+
+h2 {
+  color: #192c62;
+}
+
+small {
+  color: #ff3d71;
+}
+
+//Overwrites
+
+// //media qerries
+@media screen and (max-width: $notDesktop) {
+  .wrapper {
+    padding: 1rem 1rem 0 !important;
+  }
+
+  .from-box-wrapper {
+    width: 100%;
+  }
+}
